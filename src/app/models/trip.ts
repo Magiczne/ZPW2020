@@ -1,6 +1,8 @@
 import { Trip as TripInterface } from '../_types/trip';
 
 class Trip implements TripInterface {
+  static lastId = 0;
+
   id: number;
   currentPeopleCount: number;
 
@@ -11,10 +13,15 @@ class Trip implements TripInterface {
   name: string;
   photoUrl: string;
   price: number;
+  rating: number;
   startDate: Date;
 
   constructor(id: number) {
     this.id = id;
+    if (id > Trip.lastId) {
+      Trip.lastId = id;
+    }
+
     this.description = `Description ${id}`;
     this.destination = `Destination ${id}`;
     this.name = `Name ${id}`;
@@ -27,6 +34,25 @@ class Trip implements TripInterface {
     this.currentPeopleCount = 0;
 
     this.price = 100 + id;
+
+    const rating = localStorage.getItem(`trip-${this.id}-rating`);
+    this.rating = rating ? parseInt(rating, 10) : 0;
+  }
+
+  static fromInterface(data: TripInterface): Trip {
+    const trip = new Trip(Trip.lastId + 1);
+
+    trip.description = data.description;
+    trip.destination = data.destination;
+    trip.endDate = data.endDate;
+    trip.maxPeopleCount = data.maxPeopleCount;
+    trip.name = data.name;
+    trip.photoUrl = data.photoUrl;
+    trip.price = data.price;
+    trip.rating = data.rating;
+    trip.startDate = data.startDate;
+
+    return trip;
   }
 
   get isEmpty(): boolean {
@@ -45,6 +71,11 @@ class Trip implements TripInterface {
     if (this.currentPeopleCount < this.maxPeopleCount) {
       this.currentPeopleCount++;
     }
+  }
+
+  setRating(rating: number): void {
+    this.rating = rating;
+    localStorage.setItem(`trip-${this.id}-rating`, rating.toString());
   }
 
   undoReserve(): void {

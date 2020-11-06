@@ -7,6 +7,7 @@ interface Trip {
   startDate: Date;
   endDate: Date;
   price: number;
+  rating: number;
   maxPeopleCount: number;
   description: string;
   photoUrl: string;

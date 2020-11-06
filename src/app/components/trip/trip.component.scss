@@ -1,0 +1,22 @@
+.trip {
+  &-header {
+    display: flex;
+    justify-content: space-between;
+
+    h5 {
+      margin-bottom: 0;
+    }
+  }
+
+  &-image {
+    border-radius: 50%;
+  }
+
+  &--lowest-price {
+    background-color: rgba(255, 0, 0, .3);
+  }
+
+  &--highest-price {
+    background-color: rgba(0, 255, 0, .3);
+  }
+}

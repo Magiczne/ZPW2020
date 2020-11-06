@@ -1,0 +1,73 @@
+<div class="card">
+  <h4 class="card-header">Create new trip</h4>
+  <div class="card-body">
+    <form [formGroup]="form"
+          (ngSubmit)="onSubmit()">
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control"
+               id="name"
+               type="text"
+               formControlName="name">
+      </div>
+
+      <!-- Destination -->
+      <div class="form-group">
+        <label for="destination">Destination</label>
+        <input class="form-control"
+               id="destination"
+               type="text"
+               formControlName="destination">
+      </div>
+
+      <!-- Start date -->
+      <div class="form-group">
+        <label for="start_date">Start date</label>
+        <input class="form-control"
+               id="start_date"
+               type="date"
+               formControlName="startDate">
+      </div>
+
+      <!-- End date -->
+      <div class="form-group">
+        <label for="end_date">End date</label>
+        <input class="form-control"
+               id="end_date"
+               type="date"
+               formControlName="endDate">
+      </div>
+
+      <!-- Max people count -->
+      <div class="form-group">
+        <label for="max_people_count">Max people count</label>
+        <input class="form-control"
+               id="max_people_count"
+               type="number"
+               formControlName="maxPeopleCount">
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control"
+                  id="description"
+                  formControlName="description"></textarea>
+      </div>
+
+      <!-- Photo URL -->
+      <div class="form-group">
+        <label for="photo_url">Photo url</label>
+        <input class="form-control"
+               id="photo_url"
+               type="url"
+               formControlName="photoUrl">
+      </div>
+
+      <button class="btn btn-primary">
+        Save
+      </button>
+    </form>
+  </div>
+</div>
