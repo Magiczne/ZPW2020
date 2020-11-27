@@ -1,0 +1,26 @@
+<div *ngIf="trip !== undefined"
+     class="card trip-preview">
+  <div class="card-header trip-preview-header">
+    <h5>{{ trip.name | uppercase }}</h5>
+    <app-trip-rating [currentRating]="trip.rating"></app-trip-rating>
+  </div>
+
+  <div class="card-body d-flex">
+    <img class="img-fluid img-thumbnail trip-image"
+         [alt]="trip.name"
+         [src]="trip.photoUrl">
+
+    <div class="ml-4">
+      <h6 class="mb-2">
+        {{ trip.destination }},
+        <small class="text-muted">{{ trip.startDate | date }} - {{ trip.endDate | date }}</small>
+      </h6>
+
+      <p>{{ trip.description }}</p>
+    </div>
+  </div>
+
+  <div class="card-footer d-flex justify-content-between">
+    <span>{{ trip.price | currency:'$' }}</span>
+  </div>
+</div>

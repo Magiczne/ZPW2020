@@ -1,26 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Trip, TripInterface } from '../../models/trip';
+import { Trip } from '../../models/trip';
+import { TripFilters } from '../../pipes/filter-trips.pipe';
 
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { TripsService } from '../../services/trips.service';
 
 @Component({
   selector: 'app-trips',
-  templateUrl: './trips.component.html',
-  styleUrls: ['./trips.component.scss']
+  templateUrl: './page-trips.component.html',
+  styleUrls: ['./page-trips.component.scss']
 })
-export class TripsComponent implements OnInit {
+export class PageTripsComponent implements OnInit {
+  filters: TripFilters;
   trips: Array<Trip> = [];
 
   constructor(private tripsService: TripsService, private shoppingCartService: ShoppingCartService) {}
 
-  ngOnInit(): void {
-    this.loadTrips();
+  async ngOnInit(): Promise<void> {
+    await this.loadTrips();
   }
 
-  loadTrips(): void {
-    this.trips = this.tripsService.index();
+  async loadTrips(): Promise<void> {
+    this.trips = await this.tripsService.index();
   }
 
   // region Getters
@@ -29,6 +31,11 @@ export class TripsComponent implements OnInit {
     return this.trips.reduce((acc: number, curr: Trip) => {
       return acc += curr.currentPeopleCount;
     }, 0);
+  }
+
+  get maxPrice(): number {
+    const found = this.trips.find(trip => trip.id === this.maxPriceId);
+    return found ? found.price : 0;
   }
 
   get maxPriceId(): number {
@@ -51,6 +58,10 @@ export class TripsComponent implements OnInit {
 
   // region Event handlers
 
+  onFiltersChanged(filters: TripFilters): void {
+    this.filters = filters;
+  }
+
   onTripReserved(id: number): void {
     this.shoppingCartService.select(this.trips.find(trip => trip.id === id));
   }
@@ -68,9 +79,7 @@ export class TripsComponent implements OnInit {
     this.trips = this.trips.filter(trip => trip.id !== id);
   }
 
-  onTripSaved(data: TripInterface): void {
-    this.tripsService.create(data);
-  }
+
 
   // endregion
 }

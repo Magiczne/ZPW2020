@@ -1,0 +1,27 @@
+<div class="card my-4"
+     [ngClass]="{ 'booking-count--high': bookedTrips >= 10, 'booking-count--low': bookedTrips < 10 }">
+  <div class="card-body">
+    <h3 class="card-title">Booked trips: {{ bookedTrips }}</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12 col-md-3 col-lg-2">
+    <app-trip-filters [maxPrice]="maxPrice"
+                      (filtersChanged)="onFiltersChanged($event)"></app-trip-filters>
+  </div>
+  <div class="col-sm-12 col-md-9 col-lg-10">
+    <div class="row">
+      <div *ngFor="let trip of trips | filterTrips: filters"
+           class="col-md-4 mb-4">
+        <app-trip [isHighest]="trip.id === minPriceId"
+                  [isLowest]="trip.id === maxPriceId"
+                  [trip]="trip"
+                  (rated)="onTripRated($event)"
+                  (removed)="onTripRemoved($event)"
+                  (reserved)="onTripReserved($event)"
+                  (unreserved)="onTripUnreserved($event)"></app-trip>
+      </div>
+    </div>
+  </div>
+</div>

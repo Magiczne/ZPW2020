@@ -1,7 +1,11 @@
 <div class="card trip">
   <div class="card-header trip-header"
        [ngClass]="{ 'trip--lowest-price': isLowest, 'trip--highest-price': isHighest }">
-    <h5>{{ trip.name | uppercase }}</h5>
+    <h5>
+      <a [routerLink]="[ '/trip/preview', trip.id ]">
+        {{ trip.name | uppercase }}
+      </a>
+    </h5>
     <app-trip-rating [currentRating]="trip.rating"
                      (rated)="onTripRated($event)"></app-trip-rating>
   </div>

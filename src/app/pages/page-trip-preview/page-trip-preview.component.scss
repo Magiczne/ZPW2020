@@ -1,0 +1,10 @@
+.trip-preview {
+  &-header {
+    display: flex;
+    justify-content: space-between;
+
+    h5 {
+      margin-bottom: 0;
+    }
+  }
+}
