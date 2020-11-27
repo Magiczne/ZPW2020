@@ -1,0 +1,82 @@
+<div class="card">
+  <div class="card-header">
+    <h3>Filters</h3>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form">
+      <h6>Price range</h6>
+      <div class="d-flex">
+        <!-- Min price -->
+        <div class="form-group">
+          <label for="min-price">Min price</label>
+          <input class="form-control"
+                 id="min-price"
+                 type="number"
+                 [formControl]="priceMin">
+        </div>
+
+        <!-- Max price -->
+        <div class="form-group">
+          <label for="max-price">Max price</label>
+          <input class="form-control"
+                 id="max-price"
+                 type="number"
+                 [formControl]="priceMax">
+        </div>
+      </div>
+
+      <h6>Date period</h6>
+      <div>
+        <!-- Min date -->
+        <div class="form-group">
+          <label for="min-date">Min date</label>
+          <input class="form-control"
+                 id="min-date"
+                 type="date"
+                 [formControl]="dateMin">
+        </div>
+
+        <!-- Max date -->
+        <div class="form-group">
+          <label for="max-date">Max date</label>
+          <input class="form-control"
+                 id="max-date"
+                 type="date"
+                 [formControl]="dateMax">
+        </div>
+      </div>
+
+      <h6>Rating</h6>
+      <div class="d-flex">
+        <!-- Min rating -->
+        <div class="form-group">
+          <label for="min-rating">Min rating</label>
+          <input class="form-control"
+                 id="min-rating"
+                 type="number"
+                 min="0"
+                 [formControl]="ratingMin">
+        </div>
+
+        <!-- Max rating -->
+        <div class="form-group">
+          <label for="max-rating">Max rating</label>
+          <input class="form-control"
+                 id="max-rating"
+                 type="number"
+                 max="5"
+                 [formControl]="ratingMax">
+        </div>
+      </div>
+
+      <h6>Name</h6>
+      <div class="form-group">
+        <label for="trip-name">Trip name</label>
+        <input class="form-control"
+               id="trip-name"
+               type="text"
+               [formControl]="tripName">
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,27 +1,38 @@
 import { Injectable } from '@angular/core';
-import { TripInterface, Trip } from '../models/trip';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import Trips from '../_data/trips';
+import { TripInterface, Trip } from '../models/trip';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripsService {
-  trips = Trips;
+  private apiUrl = 'api/trips';
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
-  index(): Array<Trip> {
-    return this.trips;
+  constructor(private http: HttpClient) {}
+
+  async index(): Promise<Array<Trip>> {
+    return await this.http.get<Array<Trip>>(this.apiUrl).toPromise();
   }
 
-  show(id: number): Trip | undefined {
-    return this.trips.find(trip => trip.id === id);
+  async show(id: number): Promise<Trip> {
+    const url = `${this.apiUrl}/${id}`;
+
+    return await this.http.get<Trip>(url).toPromise();
   }
 
-  create(trip: TripInterface): void {
-    this.trips.push(Trip.fromInterface(trip));
+  async create(trip: TripInterface): Promise<void> {
+    await this.http.post<Trip>(this.apiUrl, Trip.fromInterface(trip), this.httpOptions).toPromise();
   }
 
-  destroy(id: number): void {
-    this.trips = this.trips.filter(trip => trip.id !== id);
+  async destroy(id: number): Promise<Trip> {
+    const url = `${this.apiUrl}/${id}`;
+
+    return await this.http.delete<Trip>(url, this.httpOptions).toPromise();
   }
 }
