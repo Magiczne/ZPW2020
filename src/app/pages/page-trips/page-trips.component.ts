@@ -5,6 +5,7 @@ import { TripFilters } from '../../pipes/filter-trips.pipe';
 
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { TripsService } from '../../services/trips.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-trips',
@@ -14,6 +15,7 @@ import { TripsService } from '../../services/trips.service';
 export class PageTripsComponent implements OnInit {
   filters: TripFilters;
   trips: Array<Trip> = [];
+  trips$: Observable<Array<Trip>> = new Observable<Array<Trip>>();
 
   constructor(private tripsService: TripsService, private shoppingCartService: ShoppingCartService) {}
 
@@ -22,7 +24,10 @@ export class PageTripsComponent implements OnInit {
   }
 
   async loadTrips(): Promise<void> {
-    this.trips = await this.tripsService.index();
+    this.trips$ = this.tripsService.index();
+    this.trips$.subscribe(trips => {
+      this.trips = trips;
+    });
   }
 
   // region Getters
@@ -78,8 +83,6 @@ export class PageTripsComponent implements OnInit {
   onTripRemoved(id: number): void {
     this.trips = this.trips.filter(trip => trip.id !== id);
   }
-
-
 
   // endregion
 }

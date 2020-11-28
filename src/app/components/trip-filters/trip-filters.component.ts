@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, OnChanges, Output, SimpleChanges} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { TripFilters } from '../../pipes/filter-trips.pipe';
@@ -8,7 +8,7 @@ import { TripFilters } from '../../pipes/filter-trips.pipe';
   templateUrl: './trip-filters.component.html',
   styleUrls: ['./trip-filters.component.scss']
 })
-export class TripFiltersComponent implements OnInit {
+export class TripFiltersComponent implements OnInit, OnChanges {
   @Input() maxPrice = 0;
   @Output() filtersChanged = new EventEmitter<TripFilters>();
 
@@ -89,5 +89,11 @@ export class TripFiltersComponent implements OnInit {
     this.form.valueChanges.subscribe(() => {
       this.filtersChanged.emit(this.parseFilters());
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.maxPrice) {
+      this.priceMax.setValue(this.maxPrice);
+    }
   }
 }
