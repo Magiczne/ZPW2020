@@ -11,13 +11,14 @@
   </div>
   <div class="card-body d-flex">
     <img class="img-fluid img-thumbnail trip-image"
+         style="width: 100px; height: 100px;"
          [alt]="trip.name"
          [src]="trip.photoUrl">
 
     <div class="ml-4">
       <h6 class="mb-2">
         {{ trip.destination }},
-        <small class="text-muted">{{ trip.startDate | date }} - {{ trip.endDate | date }}</small>
+        <small class="text-muted">{{ trip.startDate }} - {{ trip.endDate }}</small>
       </h6>
 
       <p>{{ trip.description }}</p>

@@ -1,5 +1,5 @@
 interface Trip {
-  id: number;
+  id: string;
   currentPeopleCount: number;
 
   name: string;

@@ -1,9 +1,7 @@
 import { Trip as TripInterface } from '../_types/trip';
 
 class Trip implements TripInterface {
-  static lastId = 0;
-
-  id: number;
+  id: string;
   currentPeopleCount: number;
 
   description: string;
@@ -16,11 +14,8 @@ class Trip implements TripInterface {
   rating: number;
   startDate: Date;
 
-  constructor(id: number) {
+  constructor(id: string) {
     this.id = id;
-    if (id > Trip.lastId) {
-      Trip.lastId = id;
-    }
 
     this.description = `Description ${id}`;
     this.destination = `Destination ${id}`;
@@ -30,17 +25,17 @@ class Trip implements TripInterface {
     this.startDate = new Date();
     this.endDate = new Date();
 
-    this.maxPeopleCount = id;
+    this.maxPeopleCount = 10;
     this.currentPeopleCount = 0;
 
-    this.price = 100 + id;
+    this.price = 110;
 
     const rating = localStorage.getItem(`trip-${this.id}-rating`);
     this.rating = rating ? parseInt(rating, 10) : 0;
   }
 
   static fromInterface(data: TripInterface): Trip {
-    const trip = new Trip(Trip.lastId + 1);
+    const trip = new Trip(data.id);
 
     trip.description = data.description;
     trip.destination = data.destination;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {DocumentChangeAction} from '@angular/fire/firestore';
 
-import { Trip } from '../../models/trip';
+import {Trip, TripInterface} from '../../models/trip';
 import { TripFilters } from '../../pipes/filter-trips.pipe';
 
 import { ShoppingCartService } from '../../services/shopping-cart.service';
@@ -15,7 +16,7 @@ import {Observable} from 'rxjs';
 export class PageTripsComponent implements OnInit {
   filters: TripFilters;
   trips: Array<Trip> = [];
-  trips$: Observable<Array<Trip>> = new Observable<Array<Trip>>();
+  trips$: Observable<Array<DocumentChangeAction<TripInterface>>> = new Observable<Array<DocumentChangeAction<TripInterface>>>();
 
   constructor(private tripsService: TripsService, private shoppingCartService: ShoppingCartService) {}
 
@@ -25,8 +26,13 @@ export class PageTripsComponent implements OnInit {
 
   async loadTrips(): Promise<void> {
     this.trips$ = this.tripsService.index();
-    this.trips$.subscribe(trips => {
-      this.trips = trips;
+    this.trips$.subscribe(data => {
+      this.trips = data.map(e => {
+        return Trip.fromInterface({
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        });
+      });
     });
   }
 
@@ -43,17 +49,17 @@ export class PageTripsComponent implements OnInit {
     return found ? found.price : 0;
   }
 
-  get maxPriceId(): number {
-    const trip = this.trips.reduce((prev: Trip, curr: Trip)  => {
+  get maxPriceId(): string {
+    const trip = this.trips.reduce((prev: Trip, curr: Trip) => {
       return prev.price < curr.price ? curr : prev;
     });
 
     return trip.id;
   }
 
-  get minPriceId(): number {
-    const trip = this.trips.reduce((prev: Trip, curr: Trip)  => {
-      return prev.price < curr  .price ? prev : curr;
+  get minPriceId(): string {
+    const trip = this.trips.reduce((prev: Trip, curr: Trip) => {
+      return prev.price < curr.price ? prev : curr;
     });
 
     return trip.id;
@@ -67,21 +73,25 @@ export class PageTripsComponent implements OnInit {
     this.filters = filters;
   }
 
-  onTripReserved(id: number): void {
+  onTripReserved(id: string): void {
     this.shoppingCartService.select(this.trips.find(trip => trip.id === id));
   }
 
-  onTripUnreserved(id: number): void {
+  onTripUnreserved(id: string): void {
     this.shoppingCartService.deselect(this.trips.find(trip => trip.id === id));
   }
 
-  onTripRated(data: { id: number, rating: number }): void {
+  onTripRated(data: { id: string, rating: number }): void {
     const entry = this.trips.find(trip => trip.id === data.id);
     entry?.setRating(data.rating);
   }
 
-  onTripRemoved(id: number): void {
-    this.trips = this.trips.filter(trip => trip.id !== id);
+  onTripRemoved(id: string): void {
+    this.tripsService.destroy(id)
+      .then(async () => {
+        await this.loadTrips();
+      })
+      .catch(err => console.log(err));
   }
 
   // endregion

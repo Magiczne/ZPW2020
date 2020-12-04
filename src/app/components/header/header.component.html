@@ -1,9 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <ul class="navbar-nav">
+    <li *ngIf="authService.user | async"
+        class="nav-item">
+      <a class="nav-link"
+         [routerLink]="[ 'trip/create' ]">
+        Create new trip
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"
+         [routerLink]="[ 'shopping-cart' ]">
+        Shopping cart
+      </a>
+    </li>
+  </ul>
+
+  <div class="mx-auto">
+    <a class="navbar-brand"
+       [routerLink]="[ '' ]">
+      Random booking service
+    </a>
+  </div>
+
+  <ul class="navbar-nav">
+    <li *ngIf="!(authService.user | async)"
+        class="nav-item">
+      <a class="nav-link"
+         [routerLink]="[ 'auth' ]">
+        Login / register
+      </a>
+    </li>
+
+    <li *ngIf="authService.user | async"
+        class="nav-item">
+      <button class="nav-link"
+         (click)="logout()">
+        Logout
+      </button>
+    </li>
+  </ul>
+</nav>
+
 <div class="card mb-2">
   <img alt=""
        class="card-img-top"
        src="https://via.placeholder.com/1000x100">
   <div class="card-body">
-    <h1 class="card-title">Random booking service</h1>
     <h2 class="card-subtitle">Random street, 32-125 Random place</h2>
   </div>
 </div>
+

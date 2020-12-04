@@ -12,6 +12,10 @@ export class PageTripCreateComponent {
   constructor(private tripsService: TripsService) { }
 
   onTripSaved(data: TripInterface): void {
-    this.tripsService.create(data);
+    console.log(data);
+
+    this.tripsService.create(data)
+      .then(res => console.log(res))
+      .catch(err => console.error(err));
   }
 }

@@ -17,9 +17,10 @@ export class TripCreateComponent implements OnInit {
   destination = new FormControl('', Validators.required);
   startDate = new FormControl('', Validators.required);
   endDate = new FormControl('', Validators.required);
-  maxPeopleCount = new FormControl('', Validators.required);
+  maxPeopleCount = new FormControl(0, Validators.required);
   description = new FormControl('', Validators.required);
   photoUrl = new FormControl('', Validators.required);
+  price = new FormControl(0, Validators.required);
 
   constructor(private builder: FormBuilder) {}
 
@@ -31,7 +32,8 @@ export class TripCreateComponent implements OnInit {
       endDate: this.endDate,
       maxPeopleCount: this.maxPeopleCount,
       description: this.description,
-      photoUrl: this.photoUrl
+      photoUrl: this.photoUrl,
+      price: this.price
     });
   }
 

@@ -12,10 +12,10 @@ export class TripComponent {
   @Input() isLowest: boolean;
   @Input() trip: Trip;
 
-  @Output() removed = new EventEmitter<number>();
-  @Output() rated = new EventEmitter<{ id: number, rating: number }>();
-  @Output() reserved = new EventEmitter<number>();
-  @Output() unreserved = new EventEmitter<number>();
+  @Output() removed = new EventEmitter<string>();
+  @Output() rated = new EventEmitter<{ id: string, rating: number }>();
+  @Output() reserved = new EventEmitter<string>();
+  @Output() unreserved = new EventEmitter<string>();
 
   // region Custom event handlers
 

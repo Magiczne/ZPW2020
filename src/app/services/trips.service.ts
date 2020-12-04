@@ -1,39 +1,35 @@
+import firebase from 'firebase';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
 
-import { TripInterface, Trip } from '../models/trip';
-import {Observable} from 'rxjs';
+import { TripInterface } from '../models/trip';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripsService {
-  private apiUrl = 'api/trips';
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
+  private collection = 'trips';
 
-  constructor(private http: HttpClient) {}
+  constructor(private firestore: AngularFirestore) {}
 
-  index(): Observable<Array<Trip>> {
-    return this.http.get<Array<Trip>>(this.apiUrl);
+  index(): Observable<DocumentChangeAction<TripInterface>[]> {
+    return this.firestore.collection<TripInterface>(this.collection).snapshotChanges();
   }
 
-  async show(id: number): Promise<Trip> {
-    const url = `${this.apiUrl}/${id}`;
-
-    return await this.http.get<Trip>(url).toPromise();
+  show(id: number): Observable<firebase.firestore.DocumentSnapshot<TripInterface>> {
+    return this.firestore.doc<TripInterface>(`${this.collection}/${id}`).get();
   }
 
-  async create(trip: TripInterface): Promise<void> {
-    await this.http.post<Trip>(this.apiUrl, Trip.fromInterface(trip), this.httpOptions).toPromise();
+  async create(trip: TripInterface): Promise<DocumentReference<TripInterface>> {
+    return this.firestore.collection<TripInterface>(this.collection).add({
+      currentPeopleCount: 0,
+      rating: 0,
+      ...trip
+    });
   }
 
-  async destroy(id: number): Promise<Trip> {
-    const url = `${this.apiUrl}/${id}`;
-
-    return await this.http.delete<Trip>(url, this.httpOptions).toPromise();
+  async destroy(id: string): Promise<void> {
+    return this.firestore.doc<TripInterface>(`${this.collection}/${id}`).delete();
   }
 }
