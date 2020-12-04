@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b735b76-3ad4-45b0-b5a0-ec239567ccbe" name="Default Changelist" comment="" />
+    <list default="true" id="0b735b76-3ad4-45b0-b5a0-ec239567ccbe" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +21,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1jaz0mM9RayyJSaWrwGWPGunPEg" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -31,11 +40,13 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
-    <property name="ts.external.directory.path" value="E:\Projekty\Studia\ZPW\Booking\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="E:\Projekty\Studia\ZPW\Booking\frontend\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Projekty\Studia\ZPW\Booking\backend" />
+      <recent name="E:\Projekty\Studia\ZPW\Booking\backend\src" />
       <recent name="E:\Projekty\Studia\ZPW\Booking\src\app\services" />
       <recent name="E:\Projekty\Studia\ZPW\Booking\src\app\pages" />
       <recent name="E:\Projekty\Studia\ZPW\Booking\src\app\components\pages" />
@@ -80,6 +91,7 @@
       <workItem from="1606462884800" duration="12295000" />
       <workItem from="1606725388352" duration="60000" />
       <workItem from="1607069517750" duration="7134000" />
+      <workItem from="1607078448271" duration="4317000" />
     </task>
     <servers />
   </component>
