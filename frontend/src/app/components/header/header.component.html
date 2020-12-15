@@ -22,6 +22,8 @@
     </a>
   </div>
 
+  <span class="mr-2">{{ (authService.user | async)?.email }}</span>
+
   <ul class="navbar-nav">
     <li *ngIf="!(authService.user | async)"
         class="nav-item">
@@ -33,7 +35,7 @@
 
     <li *ngIf="authService.user | async"
         class="nav-item">
-      <button class="nav-link"
+      <button class="btn btn-outline-primary"
          (click)="logout()">
         Logout
       </button>

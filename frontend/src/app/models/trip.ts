@@ -2,7 +2,6 @@ import { Trip as TripInterface } from '../_types/trip';
 
 class Trip implements TripInterface {
   id: string;
-  currentPeopleCount: number;
 
   description: string;
   destination: string;
@@ -14,29 +13,15 @@ class Trip implements TripInterface {
   rating: number;
   startDate: Date;
 
-  constructor(id: string) {
-    this.id = id;
+  comments: Array<string>;
+  reservedBy: Array<{ user: string, count: number }>;
 
-    this.description = `Description ${id}`;
-    this.destination = `Destination ${id}`;
-    this.name = `Name ${id}`;
-    this.photoUrl = 'https://via.placeholder.com/200x200';
-
-    this.startDate = new Date();
-    this.endDate = new Date();
-
-    this.maxPeopleCount = 10;
-    this.currentPeopleCount = 0;
-
-    this.price = 110;
-
-    const rating = localStorage.getItem(`trip-${this.id}-rating`);
-    this.rating = rating ? parseInt(rating, 10) : 0;
-  }
+  tmpPeopleCount: number = 0;
 
   static fromInterface(data: TripInterface): Trip {
-    const trip = new Trip(data.id);
+    const trip = new Trip();
 
+    trip.id = data.id;
     trip.description = data.description;
     trip.destination = data.destination;
     trip.endDate = data.endDate;
@@ -47,7 +32,16 @@ class Trip implements TripInterface {
     trip.rating = data.rating;
     trip.startDate = data.startDate;
 
+    trip.comments = data.comments;
+    trip.reservedBy = data.reservedBy;
+
     return trip;
+  }
+
+  get currentPeopleCount(): number {
+    return this.reservedBy.reduce((acc, data) => {
+      return acc += data.count;
+    }, 0) + this.tmpPeopleCount;
   }
 
   get isEmpty(): boolean {
@@ -64,18 +58,13 @@ class Trip implements TripInterface {
 
   reserve(): void {
     if (this.currentPeopleCount < this.maxPeopleCount) {
-      this.currentPeopleCount++;
+      this.tmpPeopleCount++;
     }
   }
 
-  setRating(rating: number): void {
-    this.rating = rating;
-    localStorage.setItem(`trip-${this.id}-rating`, rating.toString());
-  }
-
   undoReserve(): void {
-    if (this.currentPeopleCount > 0) {
-      this.currentPeopleCount--;
+    if (this.tmpPeopleCount > 0) {
+      this.tmpPeopleCount--;
     }
   }
 }

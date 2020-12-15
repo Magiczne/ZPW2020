@@ -1,6 +1,5 @@
 interface Trip {
   id: string;
-  currentPeopleCount: number;
 
   name: string;
   destination: string;
@@ -11,6 +10,9 @@ interface Trip {
   maxPeopleCount: number;
   description: string;
   photoUrl: string;
+
+  comments: Array<string>;
+  reservedBy: Array<{ user: string, count: number }>;
 }
 
 export { Trip };

@@ -20,4 +20,8 @@ export class TripShoppingCartComponent {
       return acc += entry.trip.price * entry.count;
     }, 0);
   }
+
+  onSubmit(): void {
+    this.shoppingCartService.save();
+  }
 }

@@ -1,13 +1,13 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './components/app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -25,16 +25,15 @@ import { PageTripCreateComponent } from './pages/page-trip-create/page-trip-crea
 import { PageTripPreviewComponent } from './pages/page-trip-preview/page-trip-preview.component';
 
 import { FilterTripsPipe } from './pipes/filter-trips.pipe';
-import { InMemoryDataService } from './services/in-memory-data.service';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import localePl from '@angular/common/locales/pl';
 
 import { environment } from '../environments/environment';
-import {AngularFireStorageModule} from "@angular/fire/storage";
-import {AngularFirestore} from "@angular/fire/firestore";
 
 
 registerLocaleData(localePl, 'pl');
@@ -64,15 +63,13 @@ registerLocaleData(localePl, 'pl');
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
+    ToastrModule.forRoot(),
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireStorageModule,
 
-    HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-      dataEncapsulation: false
-    })
+    HttpClientModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pl' },

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+import { AuthService } from '../../services/auth/auth.service';
 import { Trip } from '../../models/trip';
 
 @Component({
@@ -16,6 +17,8 @@ export class TripComponent {
   @Output() rated = new EventEmitter<{ id: string, rating: number }>();
   @Output() reserved = new EventEmitter<string>();
   @Output() unreserved = new EventEmitter<string>();
+
+  constructor(public authService: AuthService) {}
 
   // region Custom event handlers
 

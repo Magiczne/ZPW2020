@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {DocumentChangeAction} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 import {Trip, TripInterface} from '../../models/trip';
 import { TripFilters } from '../../pipes/filter-trips.pipe';
 
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { TripsService } from '../../services/trips.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-trips',
@@ -18,7 +19,11 @@ export class PageTripsComponent implements OnInit {
   trips: Array<Trip> = [];
   trips$: Observable<Array<DocumentChangeAction<TripInterface>>> = new Observable<Array<DocumentChangeAction<TripInterface>>>();
 
-  constructor(private tripsService: TripsService, private shoppingCartService: ShoppingCartService) {}
+  constructor(
+    private tripsService: TripsService,
+    private shoppingCartService: ShoppingCartService,
+    private toastr: ToastrService
+  ) {}
 
   async ngOnInit(): Promise<void> {
     await this.loadTrips();
@@ -81,9 +86,13 @@ export class PageTripsComponent implements OnInit {
     this.shoppingCartService.deselect(this.trips.find(trip => trip.id === id));
   }
 
-  onTripRated(data: { id: string, rating: number }): void {
+  async onTripRated(data: { id: string, rating: number }): Promise<void> {
     const entry = this.trips.find(trip => trip.id === data.id);
-    entry?.setRating(data.rating);
+
+    if (entry) {
+      entry.rating = data.rating;
+      await this.tripsService.updateRating(entry);
+    }
   }
 
   onTripRemoved(id: string): void {
@@ -91,7 +100,11 @@ export class PageTripsComponent implements OnInit {
       .then(async () => {
         await this.loadTrips();
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err.message) {
+          this.toastr.show(err.message);
+        }
+      });
   }
 
   // endregion

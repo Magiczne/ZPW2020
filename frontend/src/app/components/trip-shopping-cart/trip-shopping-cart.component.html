@@ -12,4 +12,9 @@
   <div class="card-footer">
     Summary price: {{ priceSummary | currency:'$' }}
   </div>
+  <div *ngIf="trips.length > 0"
+       (click)="onSubmit()"
+       class="card-footer">
+    <button class="btn btn-primary">Save</button>
+  </div>
 </div>

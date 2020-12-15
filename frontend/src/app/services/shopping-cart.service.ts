@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Trip } from '../models/trip';
+import { TripsService } from './trips.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
   selectedTrips: Array<{ trip: Trip, count: number }> = [];
+
+  constructor(private tripsService: TripsService) {}
 
   deselect(trip: Trip): void {
     const entry = this.selectedTrips.find(e => e.trip.id === trip.id);
@@ -30,5 +33,13 @@ export class ShoppingCartService {
         count: 1
       });
     }
+  }
+
+  save(): void {
+    this.selectedTrips.forEach(async data => {
+      await this.tripsService.updateReservations(data.trip, data.count);
+    });
+
+    this.selectedTrips = [];
   }
 }

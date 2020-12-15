@@ -48,7 +48,7 @@
   <div class="card-footer d-flex justify-content-between">
     <span>{{ trip.price | currency:'$' }}</span>
 
-    <div>
+    <div *ngIf="(authService.user | async)">
       <button class="btn btn-danger mr-2"
               (click)="onRemoveButtonClicked()">
         <svg style="width:24px;height:24px"

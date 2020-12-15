@@ -1,7 +1,11 @@
+import firebase from 'firebase';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Trip } from '../../models/trip';
+import { AuthService } from '../../services/auth/auth.service';
+import { Trip, TripInterface } from '../../models/trip';
 import { TripsService } from '../../services/trips.service';
 
 @Component({
@@ -10,16 +14,43 @@ import { TripsService } from '../../services/trips.service';
   styleUrls: ['./page-trip-preview.component.scss']
 })
 export class PageTripPreviewComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private tripsService: TripsService) { }
+  constructor(
+    private route: ActivatedRoute,
+    public authService: AuthService,
+    private tripsService: TripsService,
+    private builder: FormBuilder) { }
 
-  id = 0;
+  id = '';
   trip: Trip;
+  trip$: Observable<firebase.firestore.DocumentSnapshot<TripInterface>>;
+
+  form: FormGroup;
+  comment = new FormControl('', Validators.required);
 
   async ngOnInit(): Promise<void> {
     this.route.paramMap.subscribe(params => {
-      this.id = parseInt(params.get('id'), 10);
+      this.id = params.get('id');
     });
 
-    this.trip = await this.tripsService.show(this.id);
+    this.loadTrip();
+
+    // Init comment form
+    this.form = this.builder.group({
+      comment: this.comment
+    });
+  }
+
+  async onSubmit(): Promise<void> {
+    this.trip.comments.push(this.form.value.comment);
+    await this.tripsService.updateComments(this.trip);
+    this.loadTrip();
+  }
+
+  loadTrip(): void {
+    this.trip$ = this.tripsService.show(this.id);
+    this.trip$.subscribe(data => {
+      this.trip = Trip.fromInterface(data.data());
+      this.trip.id = this.id;
+    });
   }
 }

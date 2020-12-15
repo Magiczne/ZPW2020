@@ -17,15 +17,37 @@ export class TripsService {
     return this.firestore.collection<TripInterface>(this.collection).snapshotChanges();
   }
 
-  show(id: number): Observable<firebase.firestore.DocumentSnapshot<TripInterface>> {
+  show(id: string): Observable<firebase.firestore.DocumentSnapshot<TripInterface>> {
     return this.firestore.doc<TripInterface>(`${this.collection}/${id}`).get();
   }
 
   async create(trip: TripInterface): Promise<DocumentReference<TripInterface>> {
     return this.firestore.collection<TripInterface>(this.collection).add({
-      currentPeopleCount: 0,
+      comments: [],
+      reservedBy: [],
       rating: 0,
       ...trip
+    });
+  }
+
+  async updateComments(trip: TripInterface): Promise<void> {
+    return this.firestore.doc<TripInterface>(`${this.collection}/${trip.id}`).update({
+      comments: trip.comments
+    });
+  }
+
+  async updateRating(trip: TripInterface): Promise<void> {
+    return this.firestore.doc<TripInterface>(`${this.collection}/${trip.id}`).update({
+      rating: trip.rating
+    });
+  }
+
+  async updateReservations(trip: TripInterface, count: number): Promise<void> {
+    return this.firestore.doc<TripInterface>(`${this.collection}/${trip.id}`).update({
+      reservedBy: [
+        { user: '', count },
+        ...trip.reservedBy
+      ]
     });
   }
 
