@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <ul class="navbar-nav">
-    <li *ngIf="authService.user | async"
+    <li *ngIf="(authService.user | async) && authService.isAdmin"
         class="nav-item">
       <a class="nav-link"
          [routerLink]="[ 'trip/create' ]">

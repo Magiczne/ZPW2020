@@ -9,14 +9,15 @@ class Trip implements TripInterface {
   maxPeopleCount: number;
   name: string;
   photoUrl: string;
-  price: number;
-  rating: number;
+  price = 0;
   startDate: Date;
 
-  comments: Array<string>;
-  reservedBy: Array<{ user: string, count: number }>;
+  comments: Array<string> = [];
+  ratingVotes: Array<{ user: string, vote: number }> = [];
+  reservedBy: Array<{ user: string, count: number }> = [];
+  gallery: Array<string> = [];
 
-  tmpPeopleCount: number = 0;
+  tmpPeopleCount = 0;
 
   static fromInterface(data: TripInterface): Trip {
     const trip = new Trip();
@@ -29,13 +30,24 @@ class Trip implements TripInterface {
     trip.name = data.name;
     trip.photoUrl = data.photoUrl;
     trip.price = data.price;
-    trip.rating = data.rating;
     trip.startDate = data.startDate;
 
+    trip.ratingVotes = data.ratingVotes;
     trip.comments = data.comments;
     trip.reservedBy = data.reservedBy;
+    trip.gallery = data.gallery;
 
     return trip;
+  }
+
+  get rating(): number {
+    if (this.ratingVotes.length === 0) {
+      return 0;
+    }
+
+    return this.ratingVotes.reduce((acc, data) => {
+      return acc + data.vote;
+    }, 0) / this.ratingVotes.length;
   }
 
   get currentPeopleCount(): number {

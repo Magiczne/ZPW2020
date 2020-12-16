@@ -8,6 +8,7 @@ import { TripFilters } from '../../pipes/filter-trips.pipe';
 
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { TripsService } from '../../services/trips.service';
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-trips',
@@ -20,6 +21,7 @@ export class PageTripsComponent implements OnInit {
   trips$: Observable<Array<DocumentChangeAction<TripInterface>>> = new Observable<Array<DocumentChangeAction<TripInterface>>>();
 
   constructor(
+    private authService: AuthService,
     private tripsService: TripsService,
     private shoppingCartService: ShoppingCartService,
     private toastr: ToastrService
@@ -90,7 +92,17 @@ export class PageTripsComponent implements OnInit {
     const entry = this.trips.find(trip => trip.id === data.id);
 
     if (entry) {
-      entry.rating = data.rating;
+      const voteEntry = entry.ratingVotes.find(vote => vote.user === this.authService.userRaw.uid);
+
+      if (voteEntry) {
+        voteEntry.vote = data.rating;
+      } else {
+        entry.ratingVotes.push({
+          user: this.authService.userRaw.uid,
+          vote: data.rating
+        });
+      }
+
       await this.tripsService.updateRating(entry);
     }
   }

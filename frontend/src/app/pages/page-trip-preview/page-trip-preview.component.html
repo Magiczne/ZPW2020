@@ -25,7 +25,20 @@
   </div>
 </div>
 
-<div *ngIf="trip !== undefined && (authService.user | async)"
+<div *ngIf="trip !== undefined && (authService.user | async) && userReservedThisTrip"
+     class="mb-4">
+  <div class="card">
+    <div class="card-header">
+      <h6>Reservation</h6>
+    </div>
+
+    <div class="card-body">
+      You have already reserved <strong>{{ reservationCount }}</strong> places in this trip.
+    </div>
+  </div>
+</div>
+
+<div *ngIf="trip !== undefined && (authService.user | async) && userReservedThisTrip"
      class="card">
   <div class="card-header">
     <h6 class="mb-0">Comments</h6>

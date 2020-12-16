@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
+import { AuthService } from './auth/auth.service';
 
 import { TripInterface } from '../models/trip';
 import { Observable } from 'rxjs';
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs';
 export class TripsService {
   private collection = 'trips';
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore, private authService: AuthService) {}
 
   index(): Observable<DocumentChangeAction<TripInterface>[]> {
     return this.firestore.collection<TripInterface>(this.collection).snapshotChanges();
@@ -22,12 +23,7 @@ export class TripsService {
   }
 
   async create(trip: TripInterface): Promise<DocumentReference<TripInterface>> {
-    return this.firestore.collection<TripInterface>(this.collection).add({
-      comments: [],
-      reservedBy: [],
-      rating: 0,
-      ...trip
-    });
+    return this.firestore.collection<TripInterface>(this.collection).add(trip);
   }
 
   async updateComments(trip: TripInterface): Promise<void> {
@@ -38,14 +34,14 @@ export class TripsService {
 
   async updateRating(trip: TripInterface): Promise<void> {
     return this.firestore.doc<TripInterface>(`${this.collection}/${trip.id}`).update({
-      rating: trip.rating
+      ratingVotes: trip.ratingVotes
     });
   }
 
   async updateReservations(trip: TripInterface, count: number): Promise<void> {
     return this.firestore.doc<TripInterface>(`${this.collection}/${trip.id}`).update({
       reservedBy: [
-        { user: '', count },
+        { user: this.authService.userRaw.uid, count },
         ...trip.reservedBy
       ]
     });

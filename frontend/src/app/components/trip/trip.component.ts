@@ -20,6 +20,14 @@ export class TripComponent {
 
   constructor(public authService: AuthService) {}
 
+  get userReservedThisTrip(): boolean {
+    if (this.authService.userRaw) {
+      return this.trip.reservedBy.map(entry => entry.user).includes(this.authService.userRaw.uid);
+    }
+
+    return false;
+  }
+
   // region Custom event handlers
 
   onTripRated(rating: number): void {

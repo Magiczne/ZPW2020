@@ -27,6 +27,18 @@ export class PageTripPreviewComponent implements OnInit {
   form: FormGroup;
   comment = new FormControl('', Validators.required);
 
+  get userReservedThisTrip(): boolean {
+    return this.trip.reservedBy.map(entry => entry.user).includes(this.authService.userRaw.uid);
+  }
+
+  get reservationCount(): number {
+    const data = this.trip.reservedBy.find(entry => {
+      return entry.user === this.authService.userRaw.uid;
+    });
+
+    return data ? data.count : 0;
+  }
+
   async ngOnInit(): Promise<void> {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');

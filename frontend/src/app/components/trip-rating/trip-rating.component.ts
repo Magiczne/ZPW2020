@@ -9,11 +9,14 @@ export class TripRatingComponent {
   range = Array(5).fill(0).map((_, i) => i);
 
   @Input() currentRating = 0;
+  @Input() canVote = true;
   @Output() rated = new EventEmitter<number>();
 
   setRating(rating: number): void {
-    this.currentRating = rating;
+    if (this.canVote) {
+      this.currentRating = rating;
 
-    this.rated.emit(this.currentRating);
+      this.rated.emit(this.currentRating);
+    }
   }
 }
