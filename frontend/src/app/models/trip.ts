@@ -57,7 +57,7 @@ class Trip implements TripInterface {
   }
 
   get isEmpty(): boolean {
-    return this.currentPeopleCount === 0;
+    return this.tmpPeopleCount === 0;
   }
 
   get isFull(): boolean {

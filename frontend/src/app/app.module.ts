@@ -34,6 +34,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import localePl from '@angular/common/locales/pl';
 
 import { environment } from '../environments/environment';
+import { PageDashboardComponent } from './pages/page-dashboard/page-dashboard.component';
+import { DashboardNavComponent } from './components/dashboard-nav/dashboard-nav.component';
+import { PageTripEditComponent } from './pages/page-trip-edit/page-trip-edit.component';
 
 
 registerLocaleData(localePl, 'pl');
@@ -54,7 +57,10 @@ registerLocaleData(localePl, 'pl');
     PageShoppingConfirmComponent,
     PageTripsComponent,
     PageTripCreateComponent,
-    PageTripPreviewComponent
+    PageTripPreviewComponent,
+    PageDashboardComponent,
+    DashboardNavComponent,
+    PageTripEditComponent
   ],
   imports: [
     AppRoutingModule,

@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0b735b76-3ad4-45b0-b5a0-ec239567ccbe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/frontend/src/app/_types/trip.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_types/trip.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/components/trip-rating/trip-rating.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/trip-rating/trip-rating.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/components/trip-rating/trip-rating.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/trip-rating/trip-rating.component.ts" afterDir="false" />
@@ -13,6 +14,8 @@
       <change beforePath="$PROJECT_DIR$/frontend/src/app/models/trip.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/models/trip.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/page-trips/page-trips.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/page-trips/page-trips.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/services/trips.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/trips.service.ts" afterDir="false" />
+=======
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +36,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -43,7 +47,11 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+<<<<<<< Updated upstream
     <property name="ts.external.directory.path" value="E:\Projekty\Studia\ZPW\Booking\frontend\node_modules\typescript\lib" />
+=======
+    <property name="ts.external.directory.path" value="C:\Projekty\ZPW2020\frontend\node_modules\typescript\lib" />
+>>>>>>> Stashed changes
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -92,13 +100,21 @@
       <workItem from="1606462884800" duration="12295000" />
       <workItem from="1606725388352" duration="60000" />
       <workItem from="1607069517750" duration="7134000" />
+<<<<<<< Updated upstream
       <workItem from="1608131814326" duration="5260000" />
+=======
+      <workItem from="1607974040097" duration="2085000" />
+      <workItem from="1608030797926" duration="53000" />
+      <workItem from="1608057895478" duration="8679000" />
+      <workItem from="1608149491922" duration="357000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< Updated upstream
   <component name="WindowStateProjectService">
     <state x="765" y="255" key="#com.intellij.ide.util.MemberChooser" timestamp="1606473233381">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -121,4 +137,6 @@
     </state>
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1608139501186" />
   </component>
+=======
+>>>>>>> Stashed changes
 </project>

@@ -13,7 +13,7 @@
   <div class="col-sm-12 col-md-9 col-lg-10">
     <div class="row">
       <div *ngFor="let trip of trips | filterTrips: filters"
-           class="col-md-4 mb-4">
+           class="col-md-6 mb-4">
         <app-trip [isHighest]="trip.id === minPriceId"
                   [isLowest]="trip.id === maxPriceId"
                   [trip]="trip"

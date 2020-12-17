@@ -26,6 +26,19 @@ export class TripsService {
     return this.firestore.collection<TripInterface>(this.collection).add(trip);
   }
 
+  async update(trip: TripInterface): Promise<void> {
+    return this.firestore.doc<TripInterface>(`${this.collection}/${trip.id}`).update({
+      name: trip.name,
+      destination: trip.destination,
+      startDate: trip.startDate,
+      endDate: trip.endDate,
+      price: trip.price,
+      maxPeopleCount: trip.maxPeopleCount,
+      description: trip.description,
+      photoUrl: trip.photoUrl
+    });
+  }
+
   async updateComments(trip: TripInterface): Promise<void> {
     return this.firestore.doc<TripInterface>(`${this.collection}/${trip.id}`).update({
       comments: trip.comments

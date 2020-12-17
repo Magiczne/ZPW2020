@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { TripInterface } from '../../models/trip';
 import { TripsService } from '../../services/trips.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-page-trip-create',
@@ -9,13 +10,15 @@ import { TripsService } from '../../services/trips.service';
   styleUrls: ['./page-trip-create.component.scss']
 })
 export class PageTripCreateComponent {
-  constructor(private tripsService: TripsService) { }
+  constructor(private tripsService: TripsService, private toastrService: ToastrService) { }
 
   onTripSaved(data: TripInterface): void {
-    console.log(data);
-
     this.tripsService.create(data)
-      .then(res => console.log(res))
-      .catch(err => console.error(err));
+      .then(() => {
+        this.toastrService.show('Trip saved successfully');
+      })
+      .catch(() => {
+        this.toastrService.show('An error occurred');
+      });
   }
 }
