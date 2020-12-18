@@ -11,6 +11,10 @@
       <a class="nav-link"
          [routerLink]="[ 'shopping-cart' ]">
         Shopping cart
+        <span *ngIf="shoppingCart.selectedTrips.length > 0"
+              class="badge badge-primary">
+          {{ shoppingCart.tripsCount }}
+        </span>
       </a>
     </li>
   </ul>

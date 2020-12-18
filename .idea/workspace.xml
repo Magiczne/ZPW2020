@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="0b735b76-3ad4-45b0-b5a0-ec239567ccbe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< Updated upstream
@@ -17,6 +18,9 @@
 =======
 >>>>>>> Stashed changes
     </list>
+=======
+    <list default="true" id="0b735b76-3ad4-45b0-b5a0-ec239567ccbe" name="Default Changelist" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,11 +106,15 @@
       <workItem from="1607069517750" duration="7134000" />
 <<<<<<< Updated upstream
       <workItem from="1608131814326" duration="5260000" />
+<<<<<<< Updated upstream
 =======
       <workItem from="1607974040097" duration="2085000" />
       <workItem from="1608030797926" duration="53000" />
       <workItem from="1608057895478" duration="8679000" />
       <workItem from="1608149491922" duration="357000" />
+>>>>>>> Stashed changes
+=======
+      <workItem from="1608223416925" duration="461000" />
 >>>>>>> Stashed changes
     </task>
     <servers />
@@ -132,10 +140,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="616" y="250" key="run.anything.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1606470157494" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1608139501186">
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1608223883242">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1608139501186" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1608223883242" />
   </component>
 =======
 >>>>>>> Stashed changes
