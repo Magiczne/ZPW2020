@@ -6,6 +6,13 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from './environments/environment';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {ToastrModule} from 'ngx-toastr';
+import {AppRoutingModule} from './app/app-routing.module';
 
 declare const require: {
   context(path: string, deep?: boolean, filter?: RegExp): {
@@ -16,7 +23,16 @@ declare const require: {
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
-  BrowserDynamicTestingModule,
+  [
+    BrowserDynamicTestingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig) as any,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    ToastrModule.forRoot(),
+    AppRoutingModule
+  ],
   platformBrowserDynamicTesting()
 );
 // Then we find all the tests.

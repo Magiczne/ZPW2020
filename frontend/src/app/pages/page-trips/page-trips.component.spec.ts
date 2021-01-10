@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PageTripsComponent } from './page-trips.component';
+import {FilterTripsPipeMock} from '../../pipes/__mocks__/filter-trips.pipe';
 
 describe('PageTripsComponent', () => {
   let component: PageTripsComponent;
@@ -8,7 +9,7 @@ describe('PageTripsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PageTripsComponent ]
+      declarations: [ PageTripsComponent, FilterTripsPipeMock ]
     })
     .compileComponents();
   });

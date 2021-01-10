@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TripComponent } from './trip.component';
+import {Trip} from '../../models/trip';
 
 describe('TripComponent', () => {
   let component: TripComponent;
@@ -16,6 +17,11 @@ describe('TripComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TripComponent);
     component = fixture.componentInstance;
+
+    component.isHighest = true;
+    component.isLowest = false;
+    component.trip = new Trip();
+
     fixture.detectChanges();
   });
 
