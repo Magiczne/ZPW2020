@@ -23,7 +23,20 @@ export class TripsService {
   }
 
   async create(trip: TripInterface): Promise<DocumentReference<TripInterface>> {
-    return this.firestore.collection<TripInterface>(this.collection).add(trip);
+    return this.firestore.collection<TripInterface>(this.collection).add({
+      name: trip.name,
+      destination: trip.destination,
+      startDate: trip.startDate,
+      endDate: trip.endDate,
+      price: trip.price,
+      maxPeopleCount: trip.maxPeopleCount,
+      description: trip.description,
+      photoUrl: trip.photoUrl,
+      ratingVotes: [],
+      gallery: [],
+      comments: [],
+      reservedBy: []
+    } as TripInterface);
   }
 
   async update(trip: TripInterface): Promise<void> {

@@ -10,6 +10,12 @@ export class ShoppingCartService {
 
   constructor(private tripsService: TripsService) {}
 
+  get tripsCount(): number {
+    return this.selectedTrips.reduce((acc, trip) => {
+      return acc += trip.count;
+    }, 0);
+  }
+
   deselect(trip: Trip): void {
     const entry = this.selectedTrips.find(e => e.trip.id === trip.id);
 
