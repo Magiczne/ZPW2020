@@ -40,6 +40,7 @@
     <li *ngIf="authService.user | async"
         class="nav-item">
       <button class="btn btn-outline-primary"
+              id="btn-logout"
          (click)="logout()">
         Logout
       </button>
