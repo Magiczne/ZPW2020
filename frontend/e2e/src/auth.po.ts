@@ -20,4 +20,8 @@ export class AuthPage {
   get logoutButton(): ElementFinder {
     return element(by.id('btn-logout'));
   }
+
+  get toast(): ElementFinder {
+    return element(by.css('.ngx-toastr'));
+  }
 }
