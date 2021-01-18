@@ -17,6 +17,10 @@ export class AuthPage {
     return element(by.buttonText('Login'));
   }
 
+  get registerButton(): ElementFinder {
+    return element(by.buttonText('Register'));
+  }
+
   get logoutButton(): ElementFinder {
     return element(by.id('btn-logout'));
   }

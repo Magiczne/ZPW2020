@@ -1,5 +1,5 @@
 import { AuthPage } from './auth.po';
-import { $, by, browser, ExpectedConditions, logging, element } from 'protractor';
+import { browser, ExpectedConditions, logging } from 'protractor';
 
 describe('Login tests', () => {
   let checkLogs: boolean;
