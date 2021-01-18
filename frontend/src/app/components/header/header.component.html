@@ -12,7 +12,8 @@
          [routerLink]="[ 'shopping-cart' ]">
         Shopping cart
         <span *ngIf="shoppingCart.selectedTrips.length > 0"
-              class="badge badge-primary">
+              class="badge badge-primary"
+              data-pt="shopping-card-counter">
           {{ shoppingCart.tripsCount }}
         </span>
       </a>
